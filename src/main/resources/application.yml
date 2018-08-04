@@ -1,0 +1,8 @@
+student:
+  name: Charlie
+  age: 22
+  content: "name:${name},age:${age}"
+
+spring:
+  profiles:
+    active: dev
