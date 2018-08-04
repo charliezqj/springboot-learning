@@ -44,14 +44,14 @@ public class BookController {
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-    public String getUser(@PathVariable Long id, ModelMap map) {
+    public String getBookById(@PathVariable Long id, ModelMap map) {
         map.addAttribute("book", bookService.findById(id));
         map.addAttribute("action", "update");
         return BOOK_FORM_PATH_NAME;
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String putBook(@ModelAttribute Book book) {
+    public String updateBook(@ModelAttribute Book book) {
         bookService.update(book);
         return REDIRECT_TO_BOOK_URL;
     }

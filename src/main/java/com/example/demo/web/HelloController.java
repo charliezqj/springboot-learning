@@ -15,7 +15,9 @@ import java.util.Date;
 public class HelloController {
 
     @RequestMapping("/hello")
-    public String hello(Model m) {
+    public String hello(Model m) throws Exception {
+        //throw new Exception("Custom Error!");
+
         String now = DateFormat.getDateTimeInstance().format(new Date());
         m.addAttribute("now", now);
         return "hello";
@@ -23,7 +25,7 @@ public class HelloController {
 
     @RequestMapping("/")
     public String index(ModelMap map) {
-        map.addAttribute("host", "http://www.ctrip.com");
+        map.addAttribute("host", "http://localhost:8080/index");
         return "index";
     }
 }
