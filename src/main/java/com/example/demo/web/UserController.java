@@ -3,6 +3,7 @@ package com.example.demo.web;
 import com.example.demo.domain.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,8 @@ import java.util.*;
 /**
  * Created by qjzhuo on 2018-07-30.
  */
-@RestController
+//@RestController
+@Controller
 @RequestMapping(value = "/users")
 public class UserController {
 
