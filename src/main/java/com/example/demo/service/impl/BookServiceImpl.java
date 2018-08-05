@@ -1,7 +1,9 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.domain.Book;
+import com.example.demo.domain.BookRepository;
 import com.example.demo.service.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,33 +17,38 @@ import java.util.Map;
 @Service
 public class BookServiceImpl implements BookService {
 
-    private static Map<Long, Book> BOOK_DB = new HashMap<>();
+    @Autowired
+    BookRepository bookRepository;
 
     @Override
     public List<Book> findAll() {
-        return new ArrayList<>(BOOK_DB.values());
+        return new ArrayList<>(bookRepository.findAll());
     }
 
     @Override
     public Book insertByBook(Book book) {
-        book.setId(BOOK_DB.size() + 1L);
-        BOOK_DB.put(book.getId(), book);
-        return book;
+        return bookRepository.save(book);
     }
 
     @Override
     public Book update(Book book) {
-        BOOK_DB.put(book.getId(), book);
-        return book;
+        return bookRepository.save(book);
     }
 
     @Override
     public Book delete(Long id) {
-        return BOOK_DB.remove(id);
+        Book book = bookRepository.findById(id).get();
+        bookRepository.delete(book);
+        return book;
     }
 
     @Override
     public Book findById(Long id) {
-        return BOOK_DB.get(id);
+        return bookRepository.findById(id).get();
+    }
+
+    @Override
+    public Book findByName(String name) {
+        return bookRepository.findBook(name);
     }
 }

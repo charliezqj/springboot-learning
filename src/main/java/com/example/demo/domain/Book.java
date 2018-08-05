@@ -1,16 +1,25 @@
 package com.example.demo.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
  * Created by qjzhuo on 2018-07-31.
  */
+@Entity
 public class Book implements Serializable {
 
+    @Id
+    @GeneratedValue
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String writer;
 
     private String introduction;

@@ -18,4 +18,6 @@ public interface BookService {
     Book delete(Long id);
 
     Book findById(Long id);
+
+    Book findByName(String name);
 }

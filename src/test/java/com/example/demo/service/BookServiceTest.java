@@ -53,4 +53,11 @@ public class BookServiceTest {
 
     }
 
+    @Test
+    public void findByName() throws Exception {
+        String bookName = "明朝那些事儿";
+        Book book = bookService.findByName(bookName);
+        Assert.assertTrue(bookName.equals(book.getName()));
+    }
+
 }
