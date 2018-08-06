@@ -11,6 +11,7 @@
     <name>springboot-learning</name>
     <description>Demo project for Spring Boot</description>
 
+    <!-- Spring Boot 启动父依赖 -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -22,6 +23,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <mybatis-spring-boot>1.2.0</mybatis-spring-boot>
+        <mysql-connector>5.1.39</mysql-connector>
     </properties>
 
     <dependencies>
@@ -53,17 +56,6 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- servlet依赖. -->
-        <!--<dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>-->
-
         <!-- tomcat的支持.-->
         <!--<dependency>
             <groupId>org.apache.tomcat.embed</groupId>
@@ -72,17 +64,17 @@
         </dependency>-->
 
         <!-- mybatis -->
-        <!--<dependency>
+        <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>1.1.1</version>
-        </dependency>-->
+            <version>${mybatis-spring-boot}</version>
+        </dependency>
 
         <!-- mysql -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.21</version>
+            <version>${mysql-connector}</version>
         </dependency>
 
         <!-- thymeleaf -->
@@ -91,10 +83,30 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
+        <!-- Spring Data JPA 依赖 :: 数据持久层框架 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+
+        <!-- Cache 缓存依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+
+        <!-- Redis 数据源依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!-- Redis报错添加包依赖 -->
+        <!--<dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>2.0</version>
+        </dependency>-->
+
     </dependencies>
 
     <build>

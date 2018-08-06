@@ -15,3 +15,13 @@ spring:
 
     ## 是否启动日志 SQL 语句
     show-sql: true
+  redis:
+    host: localhost
+    post: 6379
+    jedis:
+      pool:
+        max-idle: 8
+        min-idle: 0
+        max-active: 8
+        max-wait: -1
+    timeout: 0
