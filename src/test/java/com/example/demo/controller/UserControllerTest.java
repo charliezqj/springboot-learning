@@ -1,7 +1,6 @@
-package com.example.demo.web;
+package com.example.demo.controller;
 
 import com.example.demo.DemoApplicationTests;
-import com.example.demo.web.UserController;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
