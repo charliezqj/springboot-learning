@@ -26,7 +26,7 @@ public class DemoApplicationTests {
         Assert.assertEquals(studentProperties.getAge().longValue(), 22L);
     }
 
-    @Resource
+    @Autowired
     private RedisTemplate<String, User> redisTemplate;
 
     @Test

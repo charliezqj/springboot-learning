@@ -37,7 +37,7 @@ public class CityServiceImpl implements CityService {
 
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
-            City city = operations.get(key);
+            City city = (City) operations.get(key);
             return city;
         }
 
