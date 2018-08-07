@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.dao.CityDao;
 import com.example.demo.domain.City;
 import com.example.demo.service.CityService;
+import com.example.demo.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -20,8 +21,8 @@ public class CityServiceImpl implements CityService {
     @Autowired
     private CityDao cityDao;
 
-    @Resource
-    private RedisTemplate<String, City> redisTemplate;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Override
     public City findCityByName(String cityName) {
@@ -33,16 +34,13 @@ public class CityServiceImpl implements CityService {
 
         // 从缓存中获取城市信息
         String key = "city_" + id;
-        ValueOperations<String, City> operations = redisTemplate.opsForValue();
-
-        boolean hasKey = redisTemplate.hasKey(key);
-        if (hasKey) {
-            City city = (City) operations.get(key);
+        if (redisUtil.exists(key)) {
+            City city = (City) redisUtil.get(key);
             return city;
         }
 
         City city = cityDao.findById(id);
-        operations.set(key, city, 10, TimeUnit.MINUTES);
+        redisUtil.set(key, city, 10 * 6 * 1000L);
         return city;
     }
 
@@ -56,9 +54,8 @@ public class CityServiceImpl implements CityService {
         Long ret = cityDao.updateCity(city);
 
         String key = "city_" + city.getId();
-        boolean hasKey = redisTemplate.hasKey(key);
-        if (hasKey) {
-            redisTemplate.delete(key);
+        if (redisUtil.exists(key)) {
+            redisUtil.remove(key);
         }
         return ret;
     }
@@ -68,9 +65,8 @@ public class CityServiceImpl implements CityService {
         Long ret = cityDao.deleteCity(id);
 
         String key = "city_" + id;
-        boolean hasKey = redisTemplate.hasKey(key);
-        if (hasKey) {
-            redisTemplate.delete(key);
+        if (redisUtil.exists(key)) {
+            redisUtil.remove(key);
         }
         return ret;
     }

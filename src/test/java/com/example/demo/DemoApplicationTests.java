@@ -1,17 +1,15 @@
 package com.example.demo;
 
+import com.example.demo.domain.City;
 import com.example.demo.domain.StudentProperties;
 import com.example.demo.domain.User;
+import com.example.demo.util.RedisUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.annotation.Resource;
-import java.util.concurrent.TimeUnit;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = DemoApplication.class)
@@ -26,10 +24,13 @@ public class DemoApplicationTests {
         Assert.assertEquals(studentProperties.getAge().longValue(), 22L);
     }
 
-    @Autowired
-    private RedisTemplate<String, User> redisTemplate;
+//    @Resource
+//    private RedisTemplate<String, User> redisTemplate;
 
-    @Test
+    @Autowired
+    private RedisUtil redisUtil;
+
+    /*@Test
     public void testRedis() throws Exception {
         if (redisTemplate.hasKey("超人")) {
             redisTemplate.delete("超人");
@@ -57,9 +58,36 @@ public class DemoApplicationTests {
         user.setAge(40);
         redisTemplate.opsForValue().set(user.getName(), user, 10, TimeUnit.MINUTES);
 
-        Assert.assertEquals(20, redisTemplate.opsForValue().get("超人").getAge().longValue());
+        User fromRedis = redisTemplate.opsForValue().get("超人");
+
+        Assert.assertEquals(20, fromRedis.getAge().longValue());
         Assert.assertEquals(30, redisTemplate.opsForValue().get("蝙蝠侠").getAge().longValue());
         Assert.assertEquals(40, redisTemplate.opsForValue().get("蜘蛛侠").getAge().longValue());
+    }*/
+
+    @Test
+    public void testCityRedis() throws Exception {
+        Long id = 3L;
+        Long seconds = 6 * 10L;
+        String key = "city_" + id;
+        City city = new City();
+        city.setId(id);
+        city.setCityName("上海");
+        city.setProvinceId(23L);
+        city.setDescription("魔都魔都");
+
+        if (redisUtil.exists(key)) {
+            City cacheCity = (City) redisUtil.get(key);
+            System.out.println(cacheCity.getCityName() + " will be deleted ");
+            redisUtil.remove(key);
+        }
+
+        System.out.println(" set new city ");
+        redisUtil.set(key, city, seconds);
+
+        System.out.println(" comparing... ");
+        City cacheCity = (City) redisUtil.get(key);
+        Assert.assertEquals(city.getCityName(), cacheCity.getCityName());
     }
 
     @Test
