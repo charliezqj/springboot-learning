@@ -8,4 +8,12 @@ import com.example.demo.domain.City;
 public interface CityService {
 
     City findCityByName(String cityName);
+
+    City findCityById(Long id);
+
+    Long saveCity(City city);
+
+    Long updateCity(City city);
+
+    Long deleteCity(Long id);
 }

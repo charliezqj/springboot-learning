@@ -3,12 +3,15 @@ package com.example.demo.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * Created by qjzhuo on 2018-08-06.
  */
 @Entity
-public class City {
+public class City implements Serializable{
+
+    private static final long serialVersionUID = -1L;
 
     @Id
     @GeneratedValue
@@ -50,5 +53,15 @@ public class City {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "City{" +
+                "id=" + id +
+                ", provinceId=" + provinceId +
+                ", cityName='" + cityName + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
