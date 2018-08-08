@@ -1,8 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.domain.City;
-import com.example.demo.domain.StudentProperties;
-import com.example.demo.domain.User;
+import com.example.demo.property.StudentProperties;
 import com.example.demo.util.RedisUtil;
 import org.junit.Assert;
 import org.junit.Test;
