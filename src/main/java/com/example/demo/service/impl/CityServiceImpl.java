@@ -5,12 +5,7 @@ import com.example.demo.domain.City;
 import com.example.demo.service.CityService;
 import com.example.demo.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by qjzhuo on 2018-08-06.
